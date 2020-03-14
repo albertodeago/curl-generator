@@ -21,6 +21,11 @@ const curlSnippet = CurlGenerator({url: "https://jsonplaceholder.typicode.com/po
 // curlSnippet => curl "https://jsonplaceholder.typicode.com/posts/101"
 ```
 
+If you are going to import it with in node via require
+```js
+const CurlGenerator = require("curl-generator").CurlGenerator;
+```
+
 #### API
 
 Currently the library export just CurlGenerator, and it's a function with just 1 object parameter with the following description:
