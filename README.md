@@ -1,6 +1,6 @@
 # CurlGenerator
 
-CurlGenerator is a **small**, dependecy free, library to generate curl snippets.
+CurlGenerator is a **small** (~1kb), dependecy free, library to generate curl snippets.
 Currently it has only 1 API, but I'm open to suggestion on how to improve and to integrate with different http request libraries.
 
 
