@@ -1,39 +1,39 @@
 {
-  "name": "curl-generator",
-  "author": "albertodeagostini.dev@gmail.com",
-  "version": "0.0.1",
-  "main": "dist/curl-generator.cjs.js",
-  "module": "dist/curl-generator.esm.js",
-  "browser": "dist/curl-generator.umd.js",
-  "typings": "dist/main.d.ts",
-  "dependencies": {
-    "ms": "^2.0.0"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.1.0",
-    "@types/ms": "^0.7.30",
-    "rollup": "^2.36.2",
-    "rollup-plugin-typescript2": "^0.29.0",
-    "ts-node": "^7.0.1",
-    "tslib": "^1.9.3",
-    "typescript": "^3.8.3"
-  },
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "ts-node test/test.ts",
-    "pretest": "npm run build"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/albertodeago/curl-generator.git"
-  },
-  "bugs": {
-    "url": "https://github.com/albertodeago/curl-generator/issues"
-  },
-  "homepage": "https://github.com/albertodeago/curl-generator"
+    "name": "curl-generator",
+    "author": "albertodeagostini.dev@gmail.com",
+    "version": "0.1.0",
+    "main": "dist/curl-generator.cjs.js",
+    "module": "dist/curl-generator.esm.js",
+    "browser": "dist/curl-generator.umd.js",
+    "typings": "dist/main.d.ts",
+    "dependencies": {
+        "ms": "^2.0.0"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^17.0.0",
+        "@rollup/plugin-node-resolve": "^11.1.0",
+        "@types/ms": "^0.7.30",
+        "rollup": "^2.36.2",
+        "rollup-plugin-typescript2": "^0.29.0",
+        "ts-node": "^7.0.1",
+        "tslib": "^1.9.3",
+        "typescript": "^3.8.3"
+    },
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "test": "ts-node test/test.ts",
+        "pretest": "npm run build"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/albertodeago/curl-generator.git"
+    },
+    "bugs": {
+        "url": "https://github.com/albertodeago/curl-generator/issues"
+    },
+    "homepage": "https://github.com/albertodeago/curl-generator"
 }
