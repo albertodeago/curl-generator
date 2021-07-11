@@ -73,26 +73,28 @@ const curlSnippet = CurlGenerator(params, options);
 // curl "https://jsonplaceholder.typicode.com/posts/1" --output test.txt --silent
 ```
 Currently the following options are supported (you can submit a PR if you need others):
-- `compressed`: `boolean`,
-- `compressedSsh`: `boolean`,
-- `fail`: `boolean`,
-- `failEarly`: `boolean`,
-- `head`: `boolean`,
-- `include`: `boolean`,
-- `insecure`: `boolean`,
-- `ipv4`: `boolean`,
-- `ipv6`: `boolean`,
-- `listOnly`: `boolean`,
-- `location`: `boolean`,
-- `locationTrusted`: `boolean`,
-- `noKeepalive`: `boolean`,
-- `output`: `string`,
-- `showError`: `boolean`,
-- `silent`: `boolean`,
-- `ssl`: `boolean`,
-- `sslv2`: `boolean`,
-- `sslv3`: `boolean`,
-- `verbose`: `boolean`,
+| Name              |      Type     |
+|:-----------------:|:-------------:|
+| compressed        | boolean       |
+| compressedSsh     | boolean       |
+| fail              | boolean       |
+| failEarly         | boolean       |
+| head              | boolean       |
+| include           | boolean       |
+| insecure          | boolean       |
+| ipv4              | boolean       |
+| ipv6              | boolean       |
+| listOnly          | boolean       |
+| location          | boolean       |
+| locationTrusted   | boolean       |
+| noKeepalive       | boolean       |
+| output            | string        |
+| showError         | boolean       |
+| silent            | boolean       |
+| ssl               | boolean       |
+| sslv2             | boolean       |
+| sslv3             | boolean       |
+| verbose           | boolean       |
 
 ## Contributing
 
