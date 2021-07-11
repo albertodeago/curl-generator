@@ -58,6 +58,42 @@ const curlSnippet = CurlGenerator(params);
 // curlSnippet => curl "https://jsonplaceholder.typicode.com/posts" -X POST -H "Content-type: application/json; charset=UTF-8" -d "{\"id\":\"123-456-789\",\"key1\":\"value 1\",\"key2\":\"a \\\"complex\\\" value\"}"
 ```
 
+You can also pass Curl options as additional options:
+```js
+import {CurlGenerator} from "curl-generator";
+
+const params = {
+    url: "https://jsonplaceholder.typicode.com/posts/1"
+}
+const options = {
+    output: "test.txt",
+    silent: true
+}
+const curlSnippet = CurlGenerator(params, options); 
+// curl "https://jsonplaceholder.typicode.com/posts/1" --output test.txt --silent
+```
+Currently the following options are supported (you can submit a PR if you need others):
+- `compressed`: `boolean`,
+- `compressedSsh`: `boolean`,
+- `fail`: `boolean`,
+- `failEarly`: `boolean`,
+- `head`: `boolean`,
+- `include`: `boolean`,
+- `insecure`: `boolean`,
+- `ipv4`: `boolean`,
+- `ipv6`: `boolean`,
+- `listOnly`: `boolean`,
+- `location`: `boolean`,
+- `locationTrusted`: `boolean`,
+- `noKeepalive`: `boolean`,
+- `output`: `string`,
+- `showError`: `boolean`,
+- `silent`: `boolean`,
+- `ssl`: `boolean`,
+- `sslv2`: `boolean`,
+- `sslv3`: `boolean`,
+- `verbose`: `boolean`,
+
 ## Contributing
 
 The library is written in typescript (it's my first typescript project so I'm very open to tips and suggestions) and it comes with 3 scripts

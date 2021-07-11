@@ -6,13 +6,12 @@ const params = data.params;
 const results = data.results;
 
 
-function test(params: Object, result: string): void {
-	const curlSnippet = CurlGenerator(params)
-	// console.log("Asserting \n" + curlSnippet + "\n" + result + "\n")
+function test(params: Object, options: Object, result: string): void {
+	const curlSnippet = CurlGenerator(params, options)
 	assert.strictEqual(curlSnippet, result)
 }
 
 
 Object.keys(params).forEach(key => {
-	test(params[key], results[key]);
+	test(params[key], params[key].options, results[key]);
 })
