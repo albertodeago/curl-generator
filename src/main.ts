@@ -68,7 +68,7 @@ const getCurlMethod = function(method?: string): string {
 			PATCH: '-X PATCH',
 			DELETE: '-X DELETE',
 		}
-		result = `${types[method.toUpperCase()]} `;
+		result = `\n${types[method.toUpperCase()]} `;
 	}
 	return result;
 }
@@ -81,7 +81,7 @@ const getCurlHeaders = function(headers?: StringMap): string {
 	let result = ""
 	if (headers) {
 		Object.keys(headers).map(val => {
-			result+= `-H "${val}: ${headers[val].replace(/(\\|")/g, '\\$1')}" `;
+			result+= `\n-H "${val}: ${headers[val].replace(/(\\|")/g, '\\$1')}" `;
 		})
 	}
 	return result
@@ -94,7 +94,7 @@ const getCurlHeaders = function(headers?: StringMap): string {
 const getCurlBody = function(body?: Object): string {
 	let result = ""
 	if (body) {
-		result += `-d "${(JSON.stringify(body)).replace(/(\\|")/g, '\\$1')}" `
+		result += `\n-d "${(JSON.stringify(body)).replace(/(\\|")/g, '\\$1')}" `
 	}
 	return result
 }
@@ -121,7 +121,7 @@ const getCurlOptions = function(options?: CurlAdditionalOptions): string {
             }
         })
     }
-    return result
+    return '\n' + result
 }
 
 /**
