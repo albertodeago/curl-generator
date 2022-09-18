@@ -24,43 +24,33 @@ type StringMap = { [key: string]: string };
  * --verbose           ->   Make the operation more talkative
  */
 type CurlAdditionalOptions = {
-  compressed: boolean;
-  compressedSsh: boolean;
-  fail: boolean;
-  failEarly: boolean;
-  head: boolean;
-  include: boolean;
-  insecure: boolean;
-  ipv4: boolean;
-  ipv6: boolean;
-  listOnly: boolean;
-  location: boolean;
-  locationTrusted: boolean;
-  noKeepalive: boolean;
-  output: string;
-  showError: boolean;
-  silent: boolean;
-  ssl: boolean;
-  sslv2: boolean;
-  sslv3: boolean;
-  verbose: boolean;
+  compressed:         boolean,
+  compressedSsh:      boolean,
+  fail:               boolean,
+  failEarly:          boolean,
+  head:               boolean,
+  include:            boolean,
+  insecure:           boolean,
+  ipv4:               boolean,
+  ipv6:               boolean,
+  listOnly:           boolean,
+  location:           boolean,
+  locationTrusted:    boolean,
+  noKeepalive:        boolean,
+  output:             string,
+  showError:          boolean,
+  silent:             boolean,
+  ssl:                boolean,
+  sslv2:              boolean,
+  sslv3:              boolean,
+  verbose:            boolean,
 };
 
 type CurlRequest = {
-  method?:
-    | "GET"
-    | "get"
-    | "POST"
-    | "post"
-    | "PUT"
-    | "put"
-    | "PATCH"
-    | "patch"
-    | "DELETE"
-    | "delete";
-  headers?: StringMap;
-  body?: string;
-  url: string;
+  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
+  headers?: StringMap,
+  body?: string,
+  url: string,
 };
 
 // slash for connecting previous breakup line to current line for running cURL directly in Command Prompt
