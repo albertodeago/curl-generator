@@ -1,4 +1,4 @@
-type StringMap = {[key: string]: string}
+type StringMap = { [key: string]: string };
 
 /**
  * Additional options for curl command.
@@ -24,119 +24,137 @@ type StringMap = {[key: string]: string}
  * --verbose           ->   Make the operation more talkative
  */
 type CurlAdditionalOptions = {
-    compressed:         boolean,
-    compressedSsh:      boolean,
-    fail:               boolean,
-    failEarly:          boolean,
-    head:               boolean,
-    include:            boolean,
-    insecure:           boolean,
-    ipv4:               boolean,
-    ipv6:               boolean,
-    listOnly:           boolean,
-    location:           boolean,
-    locationTrusted:    boolean,
-    noKeepalive:        boolean,
-    output:             string,
-    showError:          boolean,
-    silent:             boolean,
-    ssl:                boolean,
-    sslv2:              boolean,
-    sslv3:              boolean,
-    verbose:            boolean,
-}
+  compressed:         boolean,
+  compressedSsh:      boolean,
+  fail:               boolean,
+  failEarly:          boolean,
+  head:               boolean,
+  include:            boolean,
+  insecure:           boolean,
+  ipv4:               boolean,
+  ipv6:               boolean,
+  listOnly:           boolean,
+  location:           boolean,
+  locationTrusted:    boolean,
+  noKeepalive:        boolean,
+  output:             string,
+  showError:          boolean,
+  silent:             boolean,
+  ssl:                boolean,
+  sslv2:              boolean,
+  sslv3:              boolean,
+  verbose:            boolean,
+};
 
 type CurlRequest = {
-	method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
-	headers?: StringMap,
-	body?: string,
-	url: string
-}
+  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
+  headers?: StringMap,
+  body?: string,
+  url: string,
+};
 
+// slash for connecting previous breakup line to current line for running cURL directly in Command Prompt
+const slash = " \\";
+const newLine = "\n";
 
 /**
- * @param {string} [method] 
+ * @param {string} [method]
  * @returns {string}
  */
-const getCurlMethod = function(method?: string): string {
-	let result: string = "";
-	if (method) {
-		const types: StringMap = {
-			GET: '-X GET',
-			POST: '-X POST',
-			PUT: '-X PUT',
-			PATCH: '-X PATCH',
-			DELETE: '-X DELETE',
-		}
-		result = `${types[method.toUpperCase()]} `;
-	}
-	return result;
-}
+const getCurlMethod = function (method?: string): string {
+  let result: string = "";
+  if (method) {
+    const types: StringMap = {
+      GET: "-X GET",
+      POST: "-X POST",
+      PUT: "-X PUT",
+      PATCH: "-X PATCH",
+      DELETE: "-X DELETE",
+    };
+    result = ` ${types[method.toUpperCase()]}`;
+  }
+  return slash + newLine + result;
+};
 
 /**
  * @param {StringMap} headers
  * @returns {string}
  */
-const getCurlHeaders = function(headers?: StringMap): string {
-	let result = ""
-	if (headers) {
-		Object.keys(headers).map(val => {
-			result+= `-H "${val}: ${headers[val].replace(/(\\|")/g, '\\$1')}" `;
-		})
-	}
-	return result
-}
+const getCurlHeaders = function (headers?: StringMap): string {
+  let result = "";
+  if (headers) {
+    Object.keys(headers).map((val) => {
+      result += `${slash}${newLine}-H "${val}: ${headers[val].replace(
+        /(\\|")/g,
+        "\\$1"
+      )}"`;
+    });
+  }
+  return result;
+};
 
 /**
  * @param {Object} body
  * @returns {string}
  */
-const getCurlBody = function(body?: Object): string {
-	let result = ""
-	if (body) {
-		result += `-d "${(JSON.stringify(body)).replace(/(\\|")/g, '\\$1')}" `
-	}
-	return result
-}
+const getCurlBody = function (body?: Object): string {
+  let result = "";
+  if (body) {
+    result += `${slash}${newLine}-d "${JSON.stringify(body).replace(
+      /(\\|")/g,
+      "\\$1"
+    )}"`;
+  }
+  return result;
+};
 
 /**
  * Given the curl additional options, turn them into curl syntax
  * @param {CurlAdditionalOptions} [options]
- * @returns {string} 
+ * @returns {string}
  */
-const getCurlOptions = function(options?: CurlAdditionalOptions): string {
-    let result = ""
-    if (options) {
-        (Object.keys(options) as Array<keyof CurlAdditionalOptions>).forEach((key: keyof CurlAdditionalOptions) => {
-            const kebabKey = key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+const getCurlOptions = function (options?: CurlAdditionalOptions): string {
+  let result = "";
+  if (options) {
+    (Object.keys(options) as Array<keyof CurlAdditionalOptions>).forEach(
+      (key: keyof CurlAdditionalOptions) => {
+        const kebabKey = key.replace(
+          /[A-Z]/g,
+          (letter) => `-${letter.toLowerCase()}`
+        );
 
-            if (!options[key]) {
-                throw new Error(`Invalid Curl option ${key}`)
-            } else if (typeof options[key] === "boolean" && options[key]) {
-                // boolean option, we just add --opt
-                result += `--${kebabKey} `
-            } else if (typeof options[key] === "string") {
-                // string option, we have to add --opt=value
-                result += `--${kebabKey} ${options[key]} `
-            }
-        })
-    }
-    return result
-}
+        if (!options[key]) {
+          throw new Error(`Invalid Curl option ${key}`);
+        } else if (typeof options[key] === "boolean" && options[key]) {
+          // boolean option, we just add --opt
+          result += `--${kebabKey} `;
+        } else if (typeof options[key] === "string") {
+          // string option, we have to add --opt=value
+          result += `--${kebabKey} ${options[key]} `;
+        }
+      }
+    );
+  }
+
+  return result ? `${slash}${newLine}${result}` : result;
+};
 
 /**
  * @param {CurlRequest} params
  * @param {CurlAdditionalOptions} [options]
  * @returns {string}
  */
-const CurlGenerator = function(params: CurlRequest, options?: CurlAdditionalOptions):string {
-	let curlSnippet = "curl "
-	curlSnippet += `"${params.url}" `
-	curlSnippet += getCurlMethod(params.method)
-	curlSnippet += getCurlHeaders(params.headers)
-	curlSnippet += getCurlBody(params.body)
-    curlSnippet += getCurlOptions(options)
-	return curlSnippet.trim();
-}
+const CurlGenerator = function (
+  params: CurlRequest,
+  options?: CurlAdditionalOptions
+): string {
+  let curlSnippet = "curl ";
+  curlSnippet += params.url;
+  curlSnippet += getCurlMethod(params.method);
+  curlSnippet += getCurlHeaders(params.headers);
+  curlSnippet += getCurlBody(params.body);
+  curlSnippet += getCurlOptions(options);
+  return curlSnippet.trim();
+};
 
-export { CurlGenerator }
+export { CurlGenerator };

@@ -1,3 +1,6 @@
+// slash for connecting previous breakup line to current line for running cURL directly in Command Prompt
+var slash = " \\";
+var newLine = "\n";
 /**
  * @param {string} [method]
  * @returns {string}
@@ -6,15 +9,15 @@ var getCurlMethod = function (method) {
     var result = "";
     if (method) {
         var types = {
-            GET: '-X GET',
-            POST: '-X POST',
-            PUT: '-X PUT',
-            PATCH: '-X PATCH',
-            DELETE: '-X DELETE',
+            GET: "-X GET",
+            POST: "-X POST",
+            PUT: "-X PUT",
+            PATCH: "-X PATCH",
+            DELETE: "-X DELETE",
         };
-        result = types[method.toUpperCase()] + " ";
+        result = " " + types[method.toUpperCase()];
     }
-    return result;
+    return slash + newLine + result;
 };
 /**
  * @param {StringMap} headers
@@ -24,7 +27,7 @@ var getCurlHeaders = function (headers) {
     var result = "";
     if (headers) {
         Object.keys(headers).map(function (val) {
-            result += "-H \"" + val + ": " + headers[val].replace(/(\\|")/g, '\\$1') + "\" ";
+            result += "" + slash + newLine + "-H \"" + val + ": " + headers[val].replace(/(\\|")/g, "\\$1") + "\"";
         });
     }
     return result;
@@ -36,7 +39,7 @@ var getCurlHeaders = function (headers) {
 var getCurlBody = function (body) {
     var result = "";
     if (body) {
-        result += "-d \"" + (JSON.stringify(body)).replace(/(\\|")/g, '\\$1') + "\" ";
+        result += "" + slash + newLine + "-d \"" + JSON.stringify(body).replace(/(\\|")/g, "\\$1") + "\"";
     }
     return result;
 };
@@ -63,7 +66,7 @@ var getCurlOptions = function (options) {
             }
         });
     }
-    return result;
+    return result ? "" + slash + newLine + result : result;
 };
 /**
  * @param {CurlRequest} params
@@ -72,7 +75,7 @@ var getCurlOptions = function (options) {
  */
 var CurlGenerator = function (params, options) {
     var curlSnippet = "curl ";
-    curlSnippet += "\"" + params.url + "\" ";
+    curlSnippet += params.url;
     curlSnippet += getCurlMethod(params.method);
     curlSnippet += getCurlHeaders(params.headers);
     curlSnippet += getCurlBody(params.body);
