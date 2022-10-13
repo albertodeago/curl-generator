@@ -120,8 +120,6 @@ The build generate three files:
 * `dist/curl-generator.umd.js`
     a UMD build, suitable for use in any environment (including the browser, as a `<script>` tag), that includes the external dependency. This corresponds to the `"browser"` field in package.json
 
-Feel free to open up an issue to suggest an improvement or an integration with an http library like axios
-
 ## Author and License
 
 [Alberto De Agostini](https://twitter.com/albertodeago88)
