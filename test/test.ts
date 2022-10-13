@@ -1,6 +1,6 @@
-const assert = require("assert");
-var CurlGenerator = require("../src/main.js").CurlGenerator;
-const data = require("../example/example-parameters");
+const assert = require('assert');
+var CurlGenerator = require('../dist/curl-generator.cjs').CurlGenerator;
+const data = require('../example/example-parameters');
 
 const params = data.params;
 const results = data.results;
