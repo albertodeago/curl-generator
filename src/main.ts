@@ -49,7 +49,7 @@ type CurlAdditionalOptions = {
 type CurlRequest = {
   method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
   headers?: StringMap,
-  body?: string,
+  body?: Object,
   url: string,
 };
 
