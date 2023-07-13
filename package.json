@@ -6,6 +6,7 @@
     "module": "dist/curl-generator.esm.js",
     "browser": "dist/curl-generator.umd.js",
     "typings": "dist/main.d.ts",
+    "license": "MIT",
     "dependencies": {
         "ms": "^2.0.0"
     },
