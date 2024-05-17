@@ -1,3 +1,4 @@
+import { CurlBody } from "./bodies/body";
 declare type StringMap = {
     [key: string]: string;
 };
@@ -49,7 +50,7 @@ declare type CurlAdditionalOptions = {
 declare type CurlRequest = {
     method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete";
     headers?: StringMap;
-    body?: Object;
+    body?: CurlBody;
     url: string;
 };
 /**
