@@ -13,3 +13,12 @@ function test(params: Object, options: Object, result: string): void {
 Object.keys(params).forEach((key) => {
   test(params[key], params[key].options, results[key]);
 });
+
+console.log(CurlGenerator({
+  url: "https://example.com",
+  method: "GET",
+  body: {
+    type: "file",
+    fileName: "test.txt"
+  }
+}));
