@@ -1,3 +1,5 @@
+import { bodyToCommand, CurlBody } from "./bodies/body";
+
 type StringMap = { [key: string]: string };
 
 /**
@@ -49,7 +51,7 @@ type CurlAdditionalOptions = {
 type CurlRequest = {
   method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
   headers?: StringMap,
-  body?: Object,
+  body?: CurlBody,
   url: string,
 };
 
@@ -84,7 +86,7 @@ const getCurlHeaders = function (headers?: StringMap): string {
   let result = "";
   if (headers) {
     Object.keys(headers).map((val) => {
-      result += `${slash}${newLine}-H "${val}: ${headers[val].replace(
+      result += `${slash}${newLine} -H "${val}: ${headers[val].replace(
         /(\\|")/g,
         "\\$1"
       )}"`;
@@ -94,16 +96,13 @@ const getCurlHeaders = function (headers?: StringMap): string {
 };
 
 /**
- * @param {Object} body
+ * @param {CurlBody} body
  * @returns {string}
  */
-const getCurlBody = function (body?: Object): string {
+const getCurlBody = function (body?: CurlBody): string {
   let result = "";
   if (body) {
-    result += `${slash}${newLine}-d "${JSON.stringify(body).replace(
-      /(\\|")/g,
-      "\\$1"
-    )}"`;
+    result += `${slash}${newLine} ${bodyToCommand(body)}`;
   }
   return result;
 };
@@ -127,10 +126,10 @@ const getCurlOptions = function (options?: CurlAdditionalOptions): string {
           throw new Error(`Invalid Curl option ${key}`);
         } else if (typeof options[key] === "boolean" && options[key]) {
           // boolean option, we just add --opt
-          result += `--${kebabKey} `;
+          result += ` --${kebabKey}`;
         } else if (typeof options[key] === "string") {
           // string option, we have to add --opt=value
-          result += `--${kebabKey} ${options[key]} `;
+          result += ` --${kebabKey} ${options[key]}`;
         }
       }
     );

@@ -72,6 +72,36 @@ const opt2 = {
         silent: true
     }
 }
+const rawBody1 = {
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    headers: {
+        "Content-Type": "text/plain"
+    },
+    body: "string data"
+}
+const rawBody2 = {
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    headers: {
+        "Content-Type": "text/plain"
+    },
+    body: {
+        type: "raw",
+        content: "string data"
+    }
+}
+const fileBody = {
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: {
+        type: "file",
+        fileName: "data.json"
+    }
+}
 
 
 const params = {
@@ -81,19 +111,25 @@ const params = {
     patch1,
     del1,
     opt1,
-    opt2
+    opt2,
+    rawBody1,
+    rawBody2,
+    fileBody
 }
 const results = {
     get1: `curl https://jsonplaceholder.typicode.com/posts/101 \\`,
     get2: `curl https://jsonplaceholder.typicode.com/todos/1 \\\n -X GET`,
-    getWithHeaders: `${'curl https://jsonplaceholder.typicode.com/todos/1 \\\n' + ' -X GET \\\n' + '-H "Content-Type: application/json"'}`,
-    getEscapeHeaders: `${'curl https://jsonplaceholder.typicode.com/todos/1 \\\n' + ' -X GET \\\n' + '-H "key: a \\"strange\\" value"'}`,
-    post1: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + '-H "Content-type: application/json; charset=UTF-8" \\\n' + '-d "{\\"id\\":\\"123-456-789\\",\\"key1\\":\\"value 1\\",\\"key2\\":\\"a \\\\\\"complex\\\\\\" value\\"}"'}`,
-    put1: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' +' -X PUT \\\n' + '-H "Content-type: application/json; charset=UTF-8" \\\n' + '-d "{\\"id\\":1,\\"title\\":\\"foo\\",\\"body\\":\\"barzzz\\",\\"userId\\":1}"'}`,
-    patch1: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' + ' -X PATCH \\\n' + '-H "Content-type: application/json; charset=UTF-8" \\\n' + '-d "{\\"title\\":\\"foo patched\\"}"'}`,
+    getWithHeaders: `${'curl https://jsonplaceholder.typicode.com/todos/1 \\\n' + ' -X GET \\\n' + ' -H "Content-Type: application/json"'}`,
+    getEscapeHeaders: `${'curl https://jsonplaceholder.typicode.com/todos/1 \\\n' + ' -X GET \\\n' + ' -H "key: a \\"strange\\" value"'}`,
+    post1: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-type: application/json; charset=UTF-8" \\\n' + ' -d "{\\"id\\":\\"123-456-789\\",\\"key1\\":\\"value 1\\",\\"key2\\":\\"a \\\\\\"complex\\\\\\" value\\"}"'}`,
+    put1: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' +' -X PUT \\\n' + ' -H "Content-type: application/json; charset=UTF-8" \\\n' + ' -d "{\\"id\\":1,\\"title\\":\\"foo\\",\\"body\\":\\"barzzz\\",\\"userId\\":1}"'}`,
+    patch1: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' + ' -X PATCH \\\n' + ' -H "Content-type: application/json; charset=UTF-8" \\\n' + ' -d "{\\"title\\":\\"foo patched\\"}"'}`,
     del1: `curl https://jsonplaceholder.typicode.com/posts/1 \\\n -X DELETE`,
-    opt1: `curl https://jsonplaceholder.typicode.com/posts/1 \\\n \\\n--silent --show-error`,
-    opt2: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' + ' \\\n' + '--output test.txt --silent'}`
+    opt1: `curl https://jsonplaceholder.typicode.com/posts/1 \\\n \\\n --silent --show-error`,
+    opt2: `${'curl https://jsonplaceholder.typicode.com/posts/1 \\\n' + ' \\\n' + ' --output test.txt --silent'}`,
+    rawBody1: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: text/plain" \\\n' + ' -d "string data"'}`,
+    rawBody2: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: text/plain" \\\n' + ' -d "string data"'}`,
+    fileBody: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: application/json" \\\n' + ' --data-binary @data.json'}`,
 }
 
 module.exports = { params, results }
