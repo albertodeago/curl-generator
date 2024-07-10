@@ -102,6 +102,23 @@ const fileBody = {
         fileName: "data.json"
     }
 }
+const queries1 = {
+    url: "https://example.com/posts?",
+    method: "GET",
+    queries: {
+        key: "val",
+        key2: ["val1", "val2"]
+    }
+}
+
+const queries2 = {
+    url: "https://example.com/posts?a=b",
+    method: "GET",
+    queries: {
+        key: "val",
+        key2: ["val1", "val2"]
+    }
+}
 
 
 const params = {
@@ -114,7 +131,9 @@ const params = {
     opt2,
     rawBody1,
     rawBody2,
-    fileBody
+    fileBody,
+    queries1,
+    queries2
 }
 const results = {
     get1: `curl https://jsonplaceholder.typicode.com/posts/101 \\`,
@@ -130,6 +149,8 @@ const results = {
     rawBody1: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: text/plain" \\\n' + ' -d "string data"'}`,
     rawBody2: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: text/plain" \\\n' + ' -d "string data"'}`,
     fileBody: `${'curl https://jsonplaceholder.typicode.com/posts \\\n' + ' -X POST \\\n' + ' -H "Content-Type: application/json" \\\n' + ' --data-binary @data.json'}`,
+    queries1: 'curl https://example.com/posts?key=val&key2=val1,val2 \\\n -X GET',
+    queries2: 'curl https://example.com/posts?a=b&key=val&key2=val1,val2 \\\n -X GET',
 }
 
 module.exports = { params, results }

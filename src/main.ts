@@ -2,6 +2,10 @@ import { bodyToCommand, CurlBody } from "./bodies/body";
 
 type StringMap = { [key: string]: string };
 
+type CurlQueries = {
+  [key: string]: string | string[];
+};
+
 /**
  * Additional options for curl command.
  *
@@ -26,33 +30,44 @@ type StringMap = { [key: string]: string };
  * --verbose           ->   Make the operation more talkative
  */
 type CurlAdditionalOptions = {
-  compressed:         boolean,
-  compressedSsh:      boolean,
-  fail:               boolean,
-  failEarly:          boolean,
-  head:               boolean,
-  include:            boolean,
-  insecure:           boolean,
-  ipv4:               boolean,
-  ipv6:               boolean,
-  listOnly:           boolean,
-  location:           boolean,
-  locationTrusted:    boolean,
-  noKeepalive:        boolean,
-  output:             string,
-  showError:          boolean,
-  silent:             boolean,
-  ssl:                boolean,
-  sslv2:              boolean,
-  sslv3:              boolean,
-  verbose:            boolean,
+  compressed: boolean;
+  compressedSsh: boolean;
+  fail: boolean;
+  failEarly: boolean;
+  head: boolean;
+  include: boolean;
+  insecure: boolean;
+  ipv4: boolean;
+  ipv6: boolean;
+  listOnly: boolean;
+  location: boolean;
+  locationTrusted: boolean;
+  noKeepalive: boolean;
+  output: string;
+  showError: boolean;
+  silent: boolean;
+  ssl: boolean;
+  sslv2: boolean;
+  sslv3: boolean;
+  verbose: boolean;
 };
 
 type CurlRequest = {
-  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
-  headers?: StringMap,
-  body?: CurlBody,
-  url: string,
+  method?:
+    | "GET"
+    | "get"
+    | "POST"
+    | "post"
+    | "PUT"
+    | "put"
+    | "PATCH"
+    | "patch"
+    | "DELETE"
+    | "delete";
+  headers?: StringMap;
+  body?: CurlBody;
+  queries?: CurlQueries;
+  url: string;
 };
 
 // slash for connecting previous breakup line to current line for running cURL directly in Command Prompt
@@ -76,6 +91,44 @@ const getCurlMethod = function (method?: string): string {
     result = ` ${types[method.toUpperCase()]}`;
   }
   return slash + newLine + result;
+};
+
+/**
+ * @param {StringMap} headers
+ * @returns {string}
+ */
+const getURLWithQueries = function (
+  url: string,
+  queries?: CurlQueries
+): string {
+  let result = url;
+
+  if (queries) {
+    if (result.indexOf("?") === -1) {
+      result += "?";
+    }
+
+    Object.entries(queries).forEach(([key, val]) => {
+      let q = "";
+      if (typeof val === "string") {
+        q = val;
+      } else if (Array.isArray(val)) {
+        q = val.join(","); // can add custom separator support if needed
+      }
+
+      if (q) {
+        if (
+          result[result.length - 1] !== "&" &&
+          result[result.length - 1] !== "?"
+        ) {
+          result += "&";
+        }
+        result += key + "=" + q;
+      }
+    });
+  }
+
+  return result;
 };
 
 /**
@@ -148,7 +201,7 @@ const CurlGenerator = function (
   options?: CurlAdditionalOptions
 ): string {
   let curlSnippet = "curl ";
-  curlSnippet += params.url;
+  curlSnippet += getURLWithQueries(params.url, params.queries);
   curlSnippet += getCurlMethod(params.method);
   curlSnippet += getCurlHeaders(params.headers);
   curlSnippet += getCurlBody(params.body);
