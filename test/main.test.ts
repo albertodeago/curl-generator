@@ -47,7 +47,7 @@ test("error options", () => {
     CurlGenerator(
       { url: "https://jsonplaceholder.typicode.com/posts/1" },
       {
-        silent: false as unknown as true,
+        silent: false,
       }
     )
   ).toThrowError(/^Invalid Curl option/);

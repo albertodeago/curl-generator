@@ -26,26 +26,26 @@ declare type StringMap = {
  * --verbose           ->   Make the operation more talkative
  */
 declare type CurlAdditionalOptions = {
-    compressed: boolean;
-    compressedSsh: boolean;
-    fail: boolean;
-    failEarly: boolean;
-    head: boolean;
-    include: boolean;
-    insecure: boolean;
-    ipv4: boolean;
-    ipv6: boolean;
-    listOnly: boolean;
-    location: boolean;
-    locationTrusted: boolean;
-    noKeepalive: boolean;
-    output: string;
-    showError: boolean;
-    silent: boolean;
-    ssl: boolean;
-    sslv2: boolean;
-    sslv3: boolean;
-    verbose: boolean;
+    compressed?: boolean;
+    compressedSsh?: boolean;
+    fail?: boolean;
+    failEarly?: boolean;
+    head?: boolean;
+    include?: boolean;
+    insecure?: boolean;
+    ipv4?: boolean;
+    ipv6?: boolean;
+    listOnly?: boolean;
+    location?: boolean;
+    locationTrusted?: boolean;
+    noKeepalive?: boolean;
+    output?: string;
+    showError?: boolean;
+    silent?: boolean;
+    ssl?: boolean;
+    sslv2?: boolean;
+    sslv3?: boolean;
+    verbose?: boolean;
 };
 declare type CurlRequest = {
     method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete";
