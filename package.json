@@ -1,7 +1,7 @@
 {
     "name": "curl-generator",
     "author": "albertodeagostini.dev@gmail.com",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "main": "dist/curl-generator.cjs.js",
     "module": "dist/curl-generator.esm.js",
     "browser": "dist/curl-generator.umd.js",
