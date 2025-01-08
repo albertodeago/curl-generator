@@ -25,7 +25,8 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "test": "vitest",
-        "coverage": "vitest run --coverage"
+        "coverage": "vitest run --coverage",
+        "typecheck": "tsc --noEmit"
     },
     "files": [
         "dist"
