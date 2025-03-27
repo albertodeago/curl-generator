@@ -36,9 +36,9 @@ export function bodyToString(body: CurlBody): string {
 
 export function bodyToCommand(body: CurlBody): string {
   if (typeof body === "string") {
-    return `-d "${body}"`;
+    return `-d '${body}'`;
   } else if (body instanceof URLSearchParams) {
-    return `-d "${body.toString()}"`;
+    return `-d '${body.toString()}'`;
   } else if (isCurlFileBody(body)) {
     return fileBodyToCommand(body);
   } else if (isCurlRawBody(body)) {
@@ -48,7 +48,7 @@ export function bodyToCommand(body: CurlBody): string {
   } else if (isCurlFormBody(body)) {
     return formBodyToCommand(body);
   } else if (typeof body === "object") {
-    return `-d "${jsonContentToString(body)}"`;
+    return `-d '${jsonContentToString(body)}'`;
   }
 
   throw new Error(`Invalid body type: ${body}`);

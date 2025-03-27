@@ -20,5 +20,5 @@ export function rawBodyToString(body: CurlRawBody): string {
 }
 
 export function rawBodyToCommand(body: CurlRawBody): string {
-  return `-d "${rawBodyToString(body)}"`;
+  return `-d '${rawBodyToString(body)}'`;
 }

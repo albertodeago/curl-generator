@@ -86,10 +86,10 @@ const getCurlHeaders = function (headers?: StringMap): string {
   let result = "";
   if (headers) {
     Object.keys(headers).map((val) => {
-      result += `${slash}${newLine} -H "${val}: ${headers[val].replace(
-        /(\\|")/g,
+      result += `${slash}${newLine} -H '${val}: ${headers[val].replace(
+        /(\\|')/g,
         "\\$1"
-      )}"`;
+      )}'`;
     });
   }
   return result;

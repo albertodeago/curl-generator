@@ -44,7 +44,7 @@ export function isCurlFormBody(body: unknown): body is CurlFormBody {
 
 export function formBodyToCommand(body: CurlFormBody): string {
   if (body.content instanceof URLSearchParams) {
-    return `-d "${body.content.toString()}"`;
+    return `-d '${body.content.toString()}'`;
   }
 
   return Object.entries(body.content)

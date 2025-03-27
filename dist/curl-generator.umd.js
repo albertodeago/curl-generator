@@ -21,20 +21,20 @@
       return body.content;
   }
   function rawBodyToCommand(body) {
-      return "-d \"" + rawBodyToString(body) + "\"";
+      return "-d '" + rawBodyToString(body) + "'";
   }
 
   function isCurlJsonBody(body) {
       return typeof body === "object" && body !== null && "type" in body && body.type === "json" && "content" in body;
   }
   function jsonContentToString(content) {
-      return JSON.stringify(content).replace(/([\\"])/g, "\\$1");
+      return JSON.stringify(content).replace(/([\\'])/g, "\\$1");
   }
   function jsonBodyToString(body) {
       return jsonContentToString(body.content);
   }
   function jsonBodyToCommand(body) {
-      return "-d \"" + jsonBodyToString(body) + "\"";
+      return "-d '" + jsonBodyToString(body) + "'";
   }
 
   function isCurlFormBody(body) {
@@ -42,7 +42,7 @@
   }
   function formBodyToCommand(body) {
       if (body.content instanceof URLSearchParams) {
-          return "-d \"" + body.content.toString() + "\"";
+          return "-d '" + body.content.toString() + "'";
       }
       return Object.entries(body.content)
           .map(function (_a) {
@@ -63,10 +63,10 @@
 
   function bodyToCommand(body) {
       if (typeof body === "string") {
-          return "-d \"" + body + "\"";
+          return "-d '" + body + "'";
       }
       else if (body instanceof URLSearchParams) {
-          return "-d \"" + body.toString() + "\"";
+          return "-d '" + body.toString() + "'";
       }
       else if (isCurlFileBody(body)) {
           return fileBodyToCommand(body);
@@ -81,7 +81,7 @@
           return formBodyToCommand(body);
       }
       else if (typeof body === "object") {
-          return "-d \"" + jsonContentToString(body) + "\"";
+          return "-d '" + jsonContentToString(body) + "'";
       }
       throw new Error("Invalid body type: " + body);
   }
@@ -115,7 +115,7 @@
       var result = "";
       if (headers) {
           Object.keys(headers).map(function (val) {
-              result += "" + slash + newLine + " -H \"" + val + ": " + headers[val].replace(/(\\|")/g, "\\$1") + "\"";
+              result += "" + slash + newLine + " -H '" + val + ": " + headers[val].replace(/(\\|')/g, "\\$1") + "'";
           });
       }
       return result;
