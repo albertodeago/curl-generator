@@ -17,7 +17,7 @@ export function isCurlJsonBody(body: unknown): body is CurlJsonBody {
 
 export function jsonContentToString(content: Record<string | number | symbol, unknown>): string {
   return JSON.stringify(content).replace(
-    /([\\"])/g,
+    /([\\'])/g,
     "\\$1"
   );
 }
@@ -27,5 +27,5 @@ export function jsonBodyToString(body: CurlJsonBody): string {
 }
 
 export function jsonBodyToCommand(body: CurlJsonBody): string {
-  return `-d "${jsonBodyToString(body)}"`;
+  return `-d '${jsonBodyToString(body)}'`;
 }
