@@ -3,6 +3,7 @@
 CurlGenerator is a **small** (~1kb), dependecy free, library to generate curl snippets.
 Currently it has only 1 API, but I'm open to suggestion on how to improve and to integrate with different http request libraries.
 
+<a href="https://www.buymeacoffee.com/albertodeago" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## Getting started
 
