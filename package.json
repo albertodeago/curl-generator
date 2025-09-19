@@ -14,12 +14,12 @@
         "@rollup/plugin-commonjs": "^17.0.0",
         "@rollup/plugin-node-resolve": "^11.1.0",
         "@types/ms": "^0.7.30",
-        "@vitest/coverage-v8": "^2.1.9",
+        "@vitest/coverage-v8": "^3.2.4",
         "rollup": "^2.79.2",
         "rollup-plugin-typescript2": "^0.29.0",
         "tslib": "^1.9.3",
         "typescript": "^3.8.3",
-        "vitest": "^2.1.9"
+        "vitest": "^3.2.4"
     },
     "scripts": {
         "build": "rollup -c",
