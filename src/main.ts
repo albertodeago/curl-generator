@@ -49,7 +49,8 @@ type CurlAdditionalOptions = {
 };
 
 type CurlRequest = {
-  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete",
+  // Query is not official HTTP method, but it's in a RFC and we want to support it. https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-safe-method-w-body
+  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete" | "HEAD" | "head" | "OPTIONS" | "options" | "CONNECT" | "connect" | "TRACE" | "trace" | "QUERY" | "query",
   headers?: StringMap,
   body?: CurlBody,
   url: string,
@@ -72,6 +73,11 @@ const getCurlMethod = function (method?: string): string {
       PUT: "-X PUT",
       PATCH: "-X PATCH",
       DELETE: "-X DELETE",
+      HEAD: "-X HEAD",
+      OPTIONS: "-X OPTIONS",
+      CONNECT: "-X CONNECT",
+      TRACE: "-X TRACE",
+      QUERY: "-X QUERY",
     };
     result = ` ${types[method.toUpperCase()]}`;
   }
