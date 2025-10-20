@@ -33,13 +33,15 @@ Currently the library export just CurlGenerator, and it's a function with just 1
 ```js
 /**
  * @param {string} url - the request url
- * @param {string} [param.method] - a value between ("GET" | "POST" | "PUT" | "PATCH" | "DELETE") it's case insensitive
+ * @param {string} [param.method] - a value between ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE" | "QUERY") it's case insensitive
  * @param {Object<string, string>} [param.headers] - an object containing the headers of the request
  * @param {Object} [body] - the body of the request
  */
 ```
 
-Example of a more "andvanced" use
+**Note:** The QUERY method is not yet an official HTTP standard but is based on an [IETF draft proposal](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-safe-method-w-body).
+
+Example of a more "advanced" use
 ```js
 import {CurlGenerator} from "curl-generator";
 

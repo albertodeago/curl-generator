@@ -100,6 +100,11 @@ var getCurlMethod = function (method) {
             PUT: "-X PUT",
             PATCH: "-X PATCH",
             DELETE: "-X DELETE",
+            HEAD: "-X HEAD",
+            OPTIONS: "-X OPTIONS",
+            CONNECT: "-X CONNECT",
+            TRACE: "-X TRACE",
+            QUERY: "-X QUERY",
         };
         result = " " + types[method.toUpperCase()];
     }
