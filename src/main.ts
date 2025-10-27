@@ -154,7 +154,7 @@ const CurlGenerator = function (
   options?: CurlAdditionalOptions
 ): string {
   let curlSnippet = "curl ";
-  curlSnippet += params.url;
+  curlSnippet += "'" + params.url + "'";
   curlSnippet += getCurlMethod(params.method);
   curlSnippet += getCurlHeaders(params.headers);
   curlSnippet += getCurlBody(params.body);
