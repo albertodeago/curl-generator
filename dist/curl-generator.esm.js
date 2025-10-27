@@ -85,24 +85,30 @@ var slash = " \\";
 var newLine = "\n";
 /**
  * @param {string} [method]
+ * @param {boolean} [noValidation]
  * @returns {string}
  */
-var getCurlMethod = function (method) {
+var getCurlMethod = function (method, noValidation) {
     var result = "";
     if (method) {
-        var types = {
-            GET: "-X GET",
-            POST: "-X POST",
-            PUT: "-X PUT",
-            PATCH: "-X PATCH",
-            DELETE: "-X DELETE",
-            HEAD: "-X HEAD",
-            OPTIONS: "-X OPTIONS",
-            CONNECT: "-X CONNECT",
-            TRACE: "-X TRACE",
-            QUERY: "-X QUERY",
-        };
-        result = " " + types[method.toUpperCase()];
+        if (noValidation) {
+            result = " -X " + method;
+        }
+        else {
+            var types = {
+                GET: "-X GET",
+                POST: "-X POST",
+                PUT: "-X PUT",
+                PATCH: "-X PATCH",
+                DELETE: "-X DELETE",
+                HEAD: "-X HEAD",
+                OPTIONS: "-X OPTIONS",
+                CONNECT: "-X CONNECT",
+                TRACE: "-X TRACE",
+                QUERY: "-X QUERY",
+            };
+            result = " " + types[method.toUpperCase()];
+        }
     }
     return slash + newLine + result;
 };
@@ -163,7 +169,7 @@ var getCurlOptions = function (options) {
 var CurlGenerator = function (params, options) {
     var curlSnippet = "curl ";
     curlSnippet += params.url;
-    curlSnippet += getCurlMethod(params.method);
+    curlSnippet += getCurlMethod(params.method, params.noValidation);
     curlSnippet += getCurlHeaders(params.headers);
     curlSnippet += getCurlBody(params.body);
     curlSnippet += getCurlOptions(options);

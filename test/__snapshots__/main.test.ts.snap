@@ -1,5 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`copyRequest 1`] = `
+"curl http://copy.example.com \\
+ -X COPY \\
+ -H 'Content-Type: application/json'"
+`;
+
 exports[`del1 1`] = `
 "curl https://jsonplaceholder.typicode.com/posts/1 \\
  -X DELETE"

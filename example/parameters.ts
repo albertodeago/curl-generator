@@ -203,3 +203,12 @@ export const queryRequest = {
     "Accept-Query": "application/jsonpath",
   }
 }
+
+export const copyRequest = {
+  url: "http://copy.example.com",
+  method: "COPY",
+  noValidation: true,
+  headers: {
+    "Content-Type": "application/json",
+  }
+}

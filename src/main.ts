@@ -51,6 +51,7 @@ type CurlAdditionalOptions = {
 type CurlRequest = {
   // Query is not official HTTP method, but it's in a RFC and we want to support it. https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-safe-method-w-body
   method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete" | "HEAD" | "head" | "OPTIONS" | "options" | "CONNECT" | "connect" | "TRACE" | "trace" | "QUERY" | "query",
+  noValidation?: boolean,
   headers?: StringMap,
   body?: CurlBody,
   url: string,
@@ -62,24 +63,29 @@ const newLine = "\n";
 
 /**
  * @param {string} [method]
+ * @param {boolean} [noValidation]
  * @returns {string}
  */
-const getCurlMethod = function (method?: string): string {
+const getCurlMethod = function (method?: string, noValidation?: boolean): string {
   let result: string = "";
   if (method) {
-    const types: StringMap = {
-      GET: "-X GET",
-      POST: "-X POST",
-      PUT: "-X PUT",
-      PATCH: "-X PATCH",
-      DELETE: "-X DELETE",
-      HEAD: "-X HEAD",
-      OPTIONS: "-X OPTIONS",
-      CONNECT: "-X CONNECT",
-      TRACE: "-X TRACE",
-      QUERY: "-X QUERY",
-    };
-    result = ` ${types[method.toUpperCase()]}`;
+    if (noValidation) {
+      result = ` -X ${method}`;
+    } else {
+      const types: StringMap = {
+        GET: "-X GET",
+        POST: "-X POST",
+        PUT: "-X PUT",
+        PATCH: "-X PATCH",
+        DELETE: "-X DELETE",
+        HEAD: "-X HEAD",
+        OPTIONS: "-X OPTIONS",
+        CONNECT: "-X CONNECT",
+        TRACE: "-X TRACE",
+        QUERY: "-X QUERY",
+      };
+      result = ` ${types[method.toUpperCase()]}`;
+    }
   }
   return slash + newLine + result;
 };
@@ -155,7 +161,7 @@ const CurlGenerator = function (
 ): string {
   let curlSnippet = "curl ";
   curlSnippet += params.url;
-  curlSnippet += getCurlMethod(params.method);
+  curlSnippet += getCurlMethod(params.method, params.noValidation);
   curlSnippet += getCurlHeaders(params.headers);
   curlSnippet += getCurlBody(params.body);
   curlSnippet += getCurlOptions(options);
