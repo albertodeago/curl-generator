@@ -195,3 +195,11 @@ export const jsonBody = {
     },
   },
 };
+
+export const queryRequest = {
+  url: "http://query.example.com",
+  method: "query",
+  headers: {
+    "Accept-Query": "application/jsonpath",
+  }
+}

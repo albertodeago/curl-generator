@@ -99,6 +99,12 @@ exports[`put1 1`] = `
  -d '{"id":1,"title":"foo","body":"barzzz","userId":1}'"
 `;
 
+exports[`queryRequest 1`] = `
+"curl http://query.example.com \\
+ -X QUERY \\
+ -H 'Accept-Query: application/jsonpath'"
+`;
+
 exports[`rawBody1 1`] = `
 "curl https://jsonplaceholder.typicode.com/posts \\
  -X POST \\
