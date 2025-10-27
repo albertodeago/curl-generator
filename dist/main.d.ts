@@ -49,6 +49,7 @@ declare type CurlAdditionalOptions = {
 };
 declare type CurlRequest = {
     method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete" | "HEAD" | "head" | "OPTIONS" | "options" | "CONNECT" | "connect" | "TRACE" | "trace" | "QUERY" | "query";
+    noValidation?: boolean;
     headers?: StringMap;
     body?: CurlBody;
     url: string;

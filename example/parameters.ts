@@ -195,3 +195,20 @@ export const jsonBody = {
     },
   },
 };
+
+export const queryRequest = {
+  url: "http://query.example.com",
+  method: "query",
+  headers: {
+    "Accept-Query": "application/jsonpath",
+  }
+}
+
+export const copyRequest = {
+  url: "http://copy.example.com",
+  method: "COPY",
+  noValidation: true,
+  headers: {
+    "Content-Type": "application/json",
+  }
+}
