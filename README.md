@@ -18,7 +18,7 @@ Or you can download the file you need from the dist folder
 ```js
 import {CurlGenerator} from "curl-generator";
 
-const curlSnippet = CurlGenerator({url: "https://jsonplaceholder.typicode.com/posts/1"}); 
+const curlSnippet = CurlGenerator({url: "https://jsonplaceholder.typicode.com/posts/1"});
 // curlSnippet => curl "https://jsonplaceholder.typicode.com/posts/101"
 ```
 
@@ -33,13 +33,11 @@ Currently the library export just CurlGenerator, and it's a function with just 1
 ```js
 /**
  * @param {string} url - the request url
- * @param {string} [param.method] - a value between ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE" | "QUERY") it's case insensitive
+ * @param {string} [param.method] - any string are ok, but TS autocompletes for standard HTTP methods ("GET", "POST", etc...) and "QUERY" (case insensitive)
  * @param {Object<string, string>} [param.headers] - an object containing the headers of the request
  * @param {Object} [body] - the body of the request
  */
 ```
-
-**Note:** The QUERY method is not yet an official HTTP standard but is based on an [IETF draft proposal](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-safe-method-w-body).
 
 Example of a more "advanced" use
 ```js
@@ -57,7 +55,7 @@ const params = {
         "key2": `a "complex" value`
     }
 }
-const curlSnippet = CurlGenerator(params); 
+const curlSnippet = CurlGenerator(params);
 // curlSnippet => curl "https://jsonplaceholder.typicode.com/posts" -X POST -H "Content-type: application/json; charset=UTF-8" -d "{\"id\":\"123-456-789\",\"key1\":\"value 1\",\"key2\":\"a \\\"complex\\\" value\"}"
 ```
 
@@ -72,7 +70,7 @@ const options = {
     output: "test.txt",
     silent: true
 }
-const curlSnippet = CurlGenerator(params, options); 
+const curlSnippet = CurlGenerator(params, options);
 // curl "https://jsonplaceholder.typicode.com/posts/1" --output test.txt --silent
 ```
 Currently the following options are supported (you can submit a PR if you need others):
