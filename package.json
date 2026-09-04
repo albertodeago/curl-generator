@@ -26,7 +26,8 @@
         "dev": "rollup -c -w",
         "test": "vitest",
         "coverage": "vitest run --coverage",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "prepare": "npm run build"
     },
     "files": [
         "dist"
