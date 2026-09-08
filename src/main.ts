@@ -50,7 +50,8 @@ type CurlAdditionalOptions = {
 
 type CurlRequest = {
   // Query is not official HTTP method, but it's in a RFC and we want to support it. https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-safe-method-w-body
-  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete" | "HEAD" | "head" | "OPTIONS" | "options" | "CONNECT" | "connect" | "TRACE" | "trace" | "QUERY" | "query",
+  // All the list of values provide TS auto-completion, but still allow custom methods as string. This is to support non-standard methods like "Cheese"
+  method?: "GET" | "get" | "POST" | "post" | "PUT" | "put" | "PATCH" | "patch" | "DELETE" | "delete" | "HEAD" | "head" | "OPTIONS" | "options" | "CONNECT" | "connect" | "TRACE" | "trace" | "QUERY" | "query" | (string & {}),
   headers?: StringMap,
   body?: CurlBody,
   url: string,
@@ -79,7 +80,8 @@ const getCurlMethod = function (method?: string): string {
       TRACE: "-X TRACE",
       QUERY: "-X QUERY",
     };
-    result = ` ${types[method.toUpperCase()]}`;
+    const curlOption = types[method.toUpperCase()] || `-X ${method}`;
+    result = ` ${curlOption}`;
   }
   return slash + newLine + result;
 };
@@ -163,3 +165,9 @@ const CurlGenerator = function (
 };
 
 export { CurlGenerator };
+
+
+CurlGenerator({
+  method: "Cheese",
+  url: "https://example.com",
+})

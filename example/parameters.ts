@@ -195,3 +195,8 @@ export const jsonBody = {
     },
   },
 };
+
+export const customMethod = {
+  url: "https://jsonplaceholder.typicode.com/posts",
+  method: "Cheese",
+};

@@ -1,5 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`customMethod 1`] = `
+"curl https://jsonplaceholder.typicode.com/posts \\
+ -X Cheese"
+`;
+
 exports[`del1 1`] = `
 "curl https://jsonplaceholder.typicode.com/posts/1 \\
  -X DELETE"
