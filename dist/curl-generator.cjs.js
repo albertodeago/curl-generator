@@ -106,7 +106,8 @@ var getCurlMethod = function (method) {
             TRACE: "-X TRACE",
             QUERY: "-X QUERY",
         };
-        result = " " + types[method.toUpperCase()];
+        var curlOption = types[method.toUpperCase()] || "-X " + method;
+        result = " " + curlOption;
     }
     return slash + newLine + result;
 };
@@ -173,5 +174,9 @@ var CurlGenerator = function (params, options) {
     curlSnippet += getCurlOptions(options);
     return curlSnippet.trim();
 };
+CurlGenerator({
+    method: "Cheese",
+    url: "https://example.com",
+});
 
 exports.CurlGenerator = CurlGenerator;

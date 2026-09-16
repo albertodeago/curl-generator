@@ -108,7 +108,8 @@
               TRACE: "-X TRACE",
               QUERY: "-X QUERY",
           };
-          result = " " + types[method.toUpperCase()];
+          var curlOption = types[method.toUpperCase()] || "-X " + method;
+          result = " " + curlOption;
       }
       return slash + newLine + result;
   };
@@ -175,6 +176,10 @@
       curlSnippet += getCurlOptions(options);
       return curlSnippet.trim();
   };
+  CurlGenerator({
+      method: "Cheese",
+      url: "https://example.com",
+  });
 
   exports.CurlGenerator = CurlGenerator;
 
